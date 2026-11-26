@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .cajita{
+        width: 100px;
+        height: 100px;
+        background-color: rgb(215, 209, 255);
+        animation: girar 1s infinite;
+    }
+
+    @keyframes girar{
+        from{
+            transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
+        
+    }
+</style>
+<body>
+    <div class="cajita"></div>
+    
+</body>
+</html>

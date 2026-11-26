@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mimo Market</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="logo">MIMO<span>MARKET</span></div>
+        <nav class="navegacion">
+            <a href="#inicio">Inicio</a>
+            <a href="#demo">Ejecutaci&oacute;n</a>
+            <a href="#slider">Slider</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="portada" id="inicio">
+            <h1>Mimo Market</h1>
+        </section>
+
+        <section class="seccion demo" id="demo">
+            <h2>Ejecuci&oacute;n del intervalo</h2>
+            <p>Muestra los n&uacute;meros del 1 al 5 y al final detiene el intervalo.</p>
+            <div class="contador-panel">
+                <div class="numero" id="numeroEjecucion">0</div>
+                <p class="estado" id="estadoEjecucion">Listo para comenzar</p>
+                <button class="boton" id="iniciarContador" type="button">Iniciar demostraci&oacute;n</button>
+            </div>
+        </section>
+
+        <section class="seccion slider-seccion" id="slider">
+            <h2>Slider autom&aacute;tico</h2>
+            <div class="slider" id="slider">
+                <div class="slider-imagen" id="sliderImagen">
+                    <img id="imagenSlider" src="" alt="">
+                    <div class="slider-capa">
+                        <p id="sliderEtiqueta"></p>
+                        <h3 id="sliderTitulo"></h3>
+                    </div>
+                </div>
+                <button class="slider-flecha anterior" id="anterior" type="button" aria-label="Anterior">&#10094;</button>
+                <button class="slider-flecha siguiente" id="siguiente" type="button" aria-label="Siguiente">&#10095;</button>
+                <div class="slider-controles">
+                    <div class="puntos" id="puntosSlider"></div>
+                    <button class="boton-pausa" id="pausarSlider" type="button">Pausar</button>
+                </div>
+            </div>
+            <p class="ayuda-slider">El cambio autom&aacute;tico se pausa al colocar el mouse sobre la imagen.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mimo Market. Proyecto acad&eacute;mico.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

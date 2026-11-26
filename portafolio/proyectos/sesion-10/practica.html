@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neko Pixel | Tecnología</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f1ff;
+            color: #38294f;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            width: min(900px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        header {
+            background: #fffaff;
+            border-bottom: 1px solid #e8ddf1;
+        }
+
+        nav {
+            display: flex;
+            min-height: 64px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .marca {
+            color: #49365f;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a:last-child {
+            color: #805c9e;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .portada {
+            display: grid;
+            min-height: 300px;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 24px;
+            margin: 24px 0 38px;
+            padding: 28px;
+            border: 1px solid #e6d6f1;
+            border-radius: 22px;
+            background: linear-gradient(130deg, #fffaff, #eadbff);
+        }
+
+        .portada small {
+            color: #a361ac;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 12px 0;
+            font-size: clamp(36px, 6vw, 54px);
+            line-height: 1;
+        }
+
+        h1 span {
+            display: block;
+            color: #ad68c6;
+        }
+
+        .portada p {
+            max-width: 360px;
+            color: #756781;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 11px 17px;
+            border-radius: 24px;
+            background: #9862d5;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .portada img {
+            width: 100%;
+            height: 220px;
+            border-radius: 18px;
+            object-fit: cover;
+        }
+
+        .catalogo h2 {
+            margin-bottom: 6px;
+            font-size: 28px;
+        }
+
+        .productos {
+            display: grid;
+            gap: 16px;
+        }
+
+        .producto {
+            display: grid;
+            min-height: 240px;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            border: 1px solid #e5d8ef;
+            border-radius: 18px;
+            background: #fffaff;
+            box-shadow: 0 8px 22px rgb(75 48 94 / 8%);
+        }
+
+        .producto-info {
+            align-self: center;
+            padding: 24px;
+        }
+
+        .categoria {
+            color: #a361ac;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .producto h3 {
+            margin: 10px 0 7px;
+            font-size: 23px;
+        }
+
+        .producto p {
+            color: #756781;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .precio {
+            color: #935eb7;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .foto {
+            position: relative;
+            display: grid;
+            min-height: 240px;
+            place-items: center;
+            overflow: hidden;
+            background: #eee3f7;
+        }
+
+        .foto img {
+            display: block;
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .foto .gira {
+            width: 170px;
+            height: 170px;
+            border: 3px solid white;
+            border-radius: 20px;
+            animation: girar 5s infinite linear;
+        }
+
+        .foto .colores {
+            animation: colores 4s infinite alternate;
+        }
+
+        .foto .cuadrado {
+            width: 130px;
+            height: 130px;
+            border: 3px solid white;
+            border-radius: 16px;
+            animation: cuadrado 4s infinite linear;
+        }
+
+        .foto--bajada {
+            min-height: 420px;
+            align-items: start;
+            padding-top: 12px;
+        }
+
+        .foto--bajada img {
+            width: 135px;
+            height: 135px;
+            border: 3px solid white;
+            border-radius: 18px;
+            animation: bajar-y-girar 5s 500ms infinite ease-in-out;
+        }
+
+        @keyframes girar {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes colores {
+            to { filter: hue-rotate(300deg) saturate(1.7); }
+        }
+
+        @keyframes cuadrado {
+            0%, 100% { transform: translate(-30px, -25px); }
+            25% { transform: translate(30px, -25px); }
+            50% { transform: translate(30px, 25px); }
+            75% { transform: translate(-30px, 25px); }
+        }
+
+        @keyframes bajar-y-girar {
+            45% { transform: translateY(200px) rotate(540deg); }
+            70% { transform: translateY(200px) rotate(720deg); }
+            100% { transform: translateY(0) rotate(1080deg); }
+        }
+
+        footer {
+            padding: 24px 0;
+            color: #756781;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .portada {
+                grid-template-columns: 1fr;
+                padding: 22px;
+            }
+
+            .portada img {
+                height: 190px;
+            }
+
+            .producto {
+                grid-template-columns: 1fr;
+            }
+
+            .producto-info {
+                grid-row: 2;
+                padding: 20px;
+            }
+
+            .foto {
+                grid-row: 1;
+            }
+
+            .foto--bajada {
+                min-height: 420px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="contenedor">
+            <a class="marca" href="#">Neko Pixel</a>
+            <a href="#catalogo">Ver productos</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <section class="portada">
+            <div>
+                <small>Tu mundo digital</small>
+                <h1>Tecnología <span></span></h1>
+                <p>Computadoras, celulares y accesorios para darle color a tu espacio.</p>
+                <a class="boton" href="#catalogo">Ver catálogo</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&amp;fit=crop&amp;w=900&amp;q=85"
+                 alt="Computadora en un espacio de trabajo">
+        </section>
+
+        <section class="catalogo" id="catalogo">
+            <h2>Productos destacados</h2>
+            <p class="subtitulo">Elige tu próximo favorito.</p>
+
+            <div class="productos">
+                <article class="producto">
+                    <div class="producto-info">
+                        <span class="categoria">01 · Computación · Gira</span>
+                        <h3>PC de escritorio</h3>
+                        <p>Potencia para jugar, crear y trabajar.</p>
+                        <span class="precio">$699</span>
+                    </div>
+                    <div class="foto">
+                        <img class="gira" src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&amp;fit=crop&amp;w=500&amp;h=500&amp;q=85"
+                             alt="PC de escritorio girando" loading="lazy">
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-info">
+                        <span class="categoria">02 · Móvil · Cambia de color</span>
+                        <h3>Teléfono inteligente</h3>
+                        <p>Tus fotos, mensajes y música siempre contigo.</p>
+                        <span class="precio">$349</span>
+                    </div>
+                    <div class="foto">
+                        <img class="colores" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                             alt="Teléfono inteligente cambiando de color" loading="lazy">
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-info">
+                        <span class="categoria">03 · Accesorios · Se desplaza</span>
+                        <h3>Teclado mecánico</h3>
+                        <p>Escritura cómoda y precisa para tus proyectos.</p>
+                        <span class="precio">$89</span>
+                    </div>
+                    <div class="foto">
+                        <img class="cuadrado" src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&amp;fit=crop&amp;w=700&amp;q=85"
+                             alt="Teclado mecánico desplazándose en un cuadrado" loading="lazy">
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <div class="producto-info">
+                        <span class="categoria">04 · Computación · Baja 200 px y gira 3 veces</span>
+                        <h3>Laptop</h3>
+                        <p>Tu espacio de trabajo listo para llevar.</p>
+                        <span class="precio">$579</span>
+                    </div>
+                    <div class="foto foto--bajada">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&amp;fit=crop&amp;w=700&amp;q=85"
+                             alt="Laptop que baja 200 píxeles, regresa y gira tres veces" loading="lazy">
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>Neko Pixel · Tecnología para tu mundo</footer>
+</body>
+</html>

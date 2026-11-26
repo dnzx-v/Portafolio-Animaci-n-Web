@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Transformaciones en CSS.">
+  <title>TRANSFORM</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #493958;
+      --pink: #ff8db8;
+      --pink-light: #ffe4ef;
+      --lavender: #a895ec;
+      --lavender-light: #eee8ff;
+      --mint: #65cdb5;
+      --mint-light: #def8ef;
+      --peach: #ffad83;
+      --peach-light: #fff0e4;
+      --white: #fffdfd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 13%, #ffdbe9 0 2px, transparent 3px),
+        radial-gradient(circle at 84% 17%, #d9d0ff 0 3px, transparent 4px),
+        radial-gradient(circle at 92% 70%, #c9f3e8 0 3px, transparent 4px),
+        linear-gradient(145deg, #fff4f8, #f8f4ff 52%, #edfbf6);
+      background-size: 45px 45px, 67px 67px, 59px 59px, auto;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 48px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      overflow: hidden;
+      padding: 40px 24px;
+      border: 3px solid var(--white);
+      border-radius: 38px;
+      background: linear-gradient(135deg, #ffd8e8, #e6dcff 60%, #d7f7ed);
+      box-shadow: 0 12px 0 #d9c9ed, 0 18px 34px rgb(102 77 133 / 14%);
+      text-align: center;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      color: rgb(255 255 255 / 84%);
+      content: "✦";
+      font-size: 3rem;
+      animation: twinkle 2.8s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      top: 28px;
+      left: 9%;
+    }
+
+    .hero::after {
+      right: 10%;
+      bottom: 20px;
+      font-size: 2rem;
+      animation-delay: .6s;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--white);
+      font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+      font-size: clamp(3.6rem, 12vw, 8rem);
+      font-weight: 1000;
+      letter-spacing: .035em;
+      line-height: 1;
+      -webkit-text-stroke: 2px #a887c8;
+      text-shadow: 0 5px 0 #d48eae, 0 10px 0 rgb(130 93 164 / 18%);
+      animation: float-title 3s ease-in-out infinite;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 32px auto;
+      padding: 19px 24px;
+      border: 2px solid white;
+      border-radius: 22px;
+      background: rgb(255 253 253 / 88%);
+      box-shadow: 0 5px 0 #ead9f2;
+      text-align: center;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #695b73;
+    }
+
+    code {
+      color: #9c5e9d;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+      font-weight: 700;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 38px 4px 18px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: #765a91;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .transform-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .transform-card {
+      --accent: var(--pink);
+      --tint: var(--pink-light);
+      min-width: 0;
+      overflow: hidden;
+      border: 2px solid white;
+      border-radius: 25px;
+      background: var(--white);
+      box-shadow: 0 7px 0 color-mix(in srgb, var(--accent) 35%, white);
+    }
+
+    .transform-card:nth-child(2) {
+      --accent: var(--mint);
+      --tint: var(--mint-light);
+    }
+
+    .transform-card:nth-child(3) {
+      --accent: var(--peach);
+      --tint: var(--peach-light);
+    }
+
+    .transform-card:nth-child(4) {
+      --accent: var(--lavender);
+      --tint: var(--lavender-light);
+    }
+
+    .card-copy {
+      padding: 18px 18px 0;
+    }
+
+    .card-copy h3 {
+      margin-bottom: 4px;
+      color: #68517e;
+      font-size: 1.23rem;
+    }
+
+    .kind {
+      display: inline-block;
+      margin: 0;
+      padding: 3px 11px;
+      border-radius: 999px;
+      background: var(--tint);
+      color: #6d527b;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .demo-stage {
+      display: grid;
+      min-height: 150px;
+      margin: 14px 12px 0;
+      place-items: center;
+      overflow: hidden;
+      border: 2px dashed color-mix(in srgb, var(--accent) 48%, white);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle, white 1.5px, transparent 2px),
+        var(--tint);
+      background-size: 16px 16px;
+    }
+
+    .specimen {
+      position: relative;
+      display: grid;
+      width: 82px;
+      height: 82px;
+      place-items: center;
+      border: 3px solid white;
+      border-radius: 24px;
+      background: var(--accent);
+      box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 65%, #735b88);
+      color: white;
+      font-size: .78rem;
+      font-weight: 900;
+      text-align: center;
+      transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+      will-change: transform;
+    }
+
+    .specimen::after {
+      position: absolute;
+      top: 9px;
+      right: 11px;
+      color: white;
+      content: "✦";
+      font-size: .7rem;
+    }
+
+    .specimen:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 6px;
+    }
+
+    .demo-stage:hover .translate,
+    .translate:focus-visible {
+      transform: translateY(-20px);
+    }
+
+    .demo-stage:hover .rotate,
+    .rotate:focus-visible {
+      transform: rotate(45deg);
+    }
+
+    .demo-stage:hover .scale,
+    .scale:focus-visible {
+      transform: scale(1.3);
+    }
+
+    .demo-stage:hover .skew,
+    .skew:focus-visible {
+      transform: skewX(20deg);
+    }
+
+    .card-details {
+      min-height: 164px;
+      padding: 14px 18px 20px;
+    }
+
+    .card-details p {
+      margin-bottom: 10px;
+      color: #685c70;
+      font-size: .92rem;
+    }
+
+    .card-details ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #7a6d81;
+      font-size: .84rem;
+    }
+
+    .card-details li + li {
+      margin-top: 5px;
+    }
+
+    @keyframes float-title {
+      50% { transform: translateY(-5px) rotate(-1deg); }
+    }
+
+    @keyframes twinkle {
+      to { opacity: .45; transform: scale(.75) rotate(25deg); }
+    }
+
+    @media (max-width: 850px) {
+      .transform-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card-details {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 430px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        min-height: 220px;
+        border-radius: 28px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .transform-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-details {
+        padding-bottom: 16px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-content">
+        <h1>TRANSFORM</h1>
+      </div>
+    </header>
+
+    <section class="intro" aria-label="Introducción">
+      <p><code>transform</code> permite mover, girar, escalar e inclinar elementos con CSS.</p>
+    </section>
+
+    <section aria-labelledby="types-title">
+      <div class="section-heading">
+        <h2 id="types-title">Elige tu movimiento ♡</h2>
+      </div>
+
+      <div class="transform-grid">
+        <article class="transform-card">
+          <div class="card-copy">
+            <h3>translate(X, Y)</h3>
+            <p class="kind">Paseíto</p>
+          </div>
+          <div class="demo-stage">
+            <figure class="specimen translate" tabindex="0" aria-label="Pasa el cursor para trasladar la figura 20 píxeles hacia arriba">Mover</figure>
+          </div>
+          <div class="card-details">
+            <p>Mueve el elemento de lugar.</p>
+            <ul>
+              <li>X positivo: derecha; negativo: izquierda.</li>
+              <li>Y positivo: abajo; negativo: arriba.</li>
+              <li>Usa píxeles (px) o porcentajes (%).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="transform-card">
+          <div class="card-copy">
+            <h3>rotate(grados)</h3>
+            <p class="kind">Vuelta</p>
+          </div>
+          <div class="demo-stage">
+            <figure class="specimen rotate" tabindex="0" aria-label="Pasa el cursor para girar la figura 45 grados">Girar</figure>
+          </div>
+          <div class="card-details">
+            <p>Gira alrededor del centro.</p>
+            <ul>
+              <li>Grados positivos: sentido del reloj.</li>
+              <li>Grados negativos: sentido contrario.</li>
+              <li>Unidad: grados (deg).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="transform-card">
+          <div class="card-copy">
+            <h3>scale(factor)</h3>
+            <p class="kind">Súper tamaño</p>
+          </div>
+          <div class="demo-stage">
+            <figure class="specimen scale" tabindex="0" aria-label="Pasa el cursor para aumentar la figura un 30 por ciento">Crecer</figure>
+          </div>
+          <div class="card-details">
+            <p>Cambia el tamaño de la figura.</p>
+            <ul>
+              <li><code>1</code> = tamaño original.</li>
+              <li><code>1.3</code> = crece un 30 %.</li>
+              <li><code>0.5</code> = queda a la mitad.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="transform-card">
+          <div class="card-copy">
+            <h3>skew(gradosX)</h3>
+            <p class="kind">Inclinación</p>
+          </div>
+          <div class="demo-stage">
+            <figure class="specimen skew" tabindex="0" aria-label="Pasa el cursor para inclinar la figura 20 grados en el eje X">Inclinar</figure>
+          </div>
+          <div class="card-details">
+            <p>Inclina sus lados en diagonal.</p>
+            <ul>
+              <li>Cambia la angulación de la figura.</li>
+              <li>Añade una sensación de movimiento.</li>
+              <li>Unidad: grados (deg).</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

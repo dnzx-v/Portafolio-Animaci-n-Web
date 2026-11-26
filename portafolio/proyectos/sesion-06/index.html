@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yume Café | Un rinconcito kawaii</title>
+  <style>
+    :root {
+      --ink: #49364f;
+      --pink-dark: #ef6d9d;
+      --cream: #fffaf4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 7%;
+      background: #fff;
+      border-bottom: 2px solid #f8e6ef;
+    }
+
+    .brand { font-size: 1.35rem; font-weight: 900; }
+    .brand span { color: var(--pink-dark); }
+    nav ul { display: flex; align-items: center; gap: 20px; margin: 0; padding: 0; list-style: none; font-size: .95rem; font-weight: 700; }
+    nav a:hover { color: var(--pink-dark); }
+
+    .dropdown { position: relative; }
+    .dropdown-trigger {
+      border: 0;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: transparent;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .dropdown-trigger::after { content: "⌄"; margin-left: 6px; }
+    .delayed-dropdown .dropdown-trigger { border-radius: 10px; background: #fff0f6; }
+    .simple-dropdown .dropdown-trigger { border: 1px solid #ded0f5; border-radius: 999px; color: #7757ab; }
+    .dropdown-menu {
+      position: absolute;
+      z-index: 3;
+      top: 100%;
+      left: 0;
+      width: 175px;
+      padding: 8px;
+      background: #fff;
+      border: 1px solid #f4dce8;
+      border-radius: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+    }
+    .delayed-dropdown .dropdown-trigger:active + .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: .35s;
+    }
+    .simple-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: 0s;
+    }
+    .dropdown-menu a { display: block; padding: 10px; border-radius: 10px; }
+    .dropdown-menu a:hover { background: #fff0f6; }
+    .simple-dropdown .dropdown-menu { border-color: #ded0f5; }
+
+    .pill {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 20px;
+      color: #fff;
+      background: var(--pink-dark);
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .pill:hover { background: #dc5487; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 24px;
+      max-width: 1000px;
+      min-height: 420px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 13px;
+      border-radius: 99px;
+      background: #f1e8ff;
+      color: #7757ab;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+    h1 { max-width: 540px; margin: 0 0 16px; font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: 1.03; }
+    h1 span { color: var(--pink-dark); }
+    .intro { max-width: 480px; color: #756878; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 25px; }
+
+    .magic-button {
+      position: relative;
+      overflow: hidden;
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 23px;
+      color: white;
+      background: linear-gradient(110deg, #f276a4, #ad80ec);
+      box-shadow: 0 8px 18px #e98cb34a;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .magic-button:hover {
+      background: linear-gradient(110deg, #d95187, #8051c7);
+      transform: scale(1.05);
+    }
+
+    .animated-button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 20px;
+      color: #fff;
+      background: #6945a7;
+      box-shadow: 0 6px 0 #49306f;
+      font-weight: 900;
+      cursor: pointer;
+      animation: bob 2s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .mascot {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+      font-size: clamp(8rem, 20vw, 13rem);
+    }
+    .speech {
+      position: absolute;
+      top: 12%;
+      left: 5%;
+      padding: 11px 15px;
+      border-radius: 18px 18px 18px 4px;
+      background: white;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .menu-section { padding: 60px 7%; background: #fff; text-align: center; }
+    .menu-section h2, .join h2 { margin: 0 0 10px; font-size: 2rem; }
+    .subheading { margin: 0 0 28px; color: #877988; }
+    .treats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: auto; }
+    .treat {
+      padding: 22px;
+      border: 1px solid #f5e5ee;
+      border-radius: 22px;
+      background: #fffafc;
+    }
+    .treat .emoji { display: block; margin-bottom: 8px; font-size: 2.4rem; }
+    .treat h3 { margin: 5px 0; }
+    .treat p { margin: 0; color: #847784; font-size: .92rem; }
+
+    .join { padding: 65px 20px 75px; text-align: center; }
+    .join form { display: flex; justify-content: center; gap: 10px; max-width: 520px; margin: 24px auto 0; }
+    .join .pill:hover { background: #9b63d9; }
+    .join input {
+      min-width: 0;
+      flex: 1;
+      border: 2px solid #eadfea;
+      border-radius: 14px;
+      outline: none;
+      padding: 14px 16px;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .join input:focus {
+      border-color: var(--pink-dark);
+      background: #fffafd;
+      box-shadow: 0 0 0 4px #ff8db833;
+    }
+    footer { padding: 18px; color: #907f90; background: #fff; text-align: center; font-size: .85rem; }
+
+    @media (max-width: 700px) {
+      .topbar { flex-wrap: wrap; padding: 15px 5%; }
+      nav { order: 3; width: 100%; }
+      nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .hero { grid-template-columns: 1fr; gap: 0; padding: 40px 7% 20px; text-align: center; }
+      .intro { margin-inline: auto; }
+      .hero-actions { justify-content: center; }
+      .mascot { min-height: 240px; }
+      .speech { left: 10%; }
+      .treats { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Yume Café, inicio">☁️ Yume <span>Café</span></a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li class="dropdown delayed-dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-controls="delayed-menu">Mantén: Explorar</button>
+          <div class="dropdown-menu" id="delayed-menu">
+            <a href="#menu">Dulces mágicos</a>
+            <a href="#unete">Club Yume</a>
+            <a href="#historia">Nuestra historia</a>
+          </div>
+        </li>
+        <li class="dropdown simple-dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-controls="simple-menu">Menú rápido</button>
+          <div class="dropdown-menu" id="simple-menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#menu">Ver postres</a>
+            <a href="#unete">Contacto</a>
+          </div>
+        </li>
+        <li><a href="#unete">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="pill" href="#unete">¡Únete! ♡</a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div>
+        <span class="eyebrow">☁️ Tu pausa bonita del día</span>
+        <h1>Un poquito de <span>magia</span> para tu corazón</h1>
+        <p class="intro">Pasa, ponte cómoda y descubre un rincón inspirado en tus animes favoritos, los postres más tiernos y los sueños grandes.</p>
+        <div class="hero-actions">
+          <a class="magic-button" href="#menu">Descubrir el menú ✨</a>
+          <a class="animated-button" href="#unete">BOTÓN ANIMADO · Entrar ♡</a>
+        </div>
+      </div>
+      <div class="mascot" role="img" aria-label="Gatito kawaii">
+        <span class="speech">¡Konnichiwa! ✨</span>
+        🐱
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <h2>Un menú hecho con amor</h2>
+      <p class="subheading">Pequeños antojos para alegrar cualquier episodio.</p>
+      <div class="treats">
+        <article class="treat">
+          <span class="emoji" aria-hidden="true">🍓</span>
+          <h3>Fresa de ensueño</h3>
+          <p>Un pastelito suave con crema y mucho cariño.</p>
+        </article>
+        <article class="treat">
+          <span class="emoji" aria-hidden="true">🍵</span>
+          <h3>Matcha lunar</h3>
+          <p>Un té calentito para recargar tu energía mágica.</p>
+        </article>
+        <article class="treat">
+          <span class="emoji" aria-hidden="true">🍡</span>
+          <h3>Mini dango feliz</h3>
+          <p>Tres bocaditos dulces con sabor a aventura.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="join" id="unete">
+      <h2>¿Nos escribimos, senpai?</h2>
+      <p class="subheading">Déjanos tu correo y recibe una dosis de ternura.</p>
+      <form action="#" method="get">
+        <input type="email" name="correo" placeholder="tu-correo@ejemplo.com" aria-label="Tu correo electrónico" required>
+        <button class="pill" type="submit">¡Apuntarme! ✨</button>
+      </form>
+    </section>
+  </main>
+
+  <footer id="historia">Hecho con mucho amor y una pizca de magia ♡ · Yume Café</footer>
+</body>
+</html>

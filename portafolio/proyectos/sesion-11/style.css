@@ -1,0 +1,665 @@
+/* Base */
+:root {
+    color-scheme: dark;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: #f5f5f5;
+    background: #171717;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #090909, #424242 48%, #101010) fixed;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* Header and navigation */
+.site-header {
+    position: relative;
+    z-index: 2;
+    height: 100px;
+    background: linear-gradient(#080808bb, #080808bb), url("media/banner.jpg") center 48% / cover no-repeat;
+}
+
+.header-inner {
+    width: min(1320px, 100%);
+    height: 96px;
+    margin: auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    color: #f4f4f4;
+    font: bold 38px/1 Georgia, "Times New Roman", serif;
+    white-space: nowrap;
+    text-shadow: 0 0 12px #fff8;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    min-width: 105px;
+    height: 46px;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #aaa;
+    border-radius: 26px;
+    color: #eee;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.nav-link:hover {
+    color: #111;
+    background: #eee;
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    color: #111;
+    background: linear-gradient(120deg, #fff, #aaa);
+    box-shadow: 0 0 16px #fff8;
+}
+
+.header-underline {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #111, #ddd, #444, #eee, #111);
+}
+
+/* Offer banner */
+main {
+    min-height: calc(100vh - 100px);
+    padding: 14px 0 38px;
+    background: linear-gradient(150deg, #111, #3b3b3b 48%, #101010);
+}
+
+.hero {
+    width: min(1150px, calc(100% - 64px));
+    height: 436px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 44% 56%;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    border-radius: 32px;
+    background: linear-gradient(120deg, #f8f8f8, #aaa 39%, #393939 58%, #111);
+    box-shadow: 0 0 16px #fff8, 0 0 34px #000b;
+    animation: fade-in .8s ease both;
+}
+
+.hero-art-wrap {
+    min-width: 0;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #fff, #d2d2d2 52%, #777);
+}
+
+.hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.hero-copy {
+    padding: 25px 32px 25px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.season-label {
+    padding: 10px 24px;
+    color: #111;
+    background: linear-gradient(100deg, #aaa, #f5f5f5, #aaa);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+.hero-copy h1 {
+    margin: 19px 0 0;
+    color: #f8f8f8;
+    font: 900 clamp(42px, 5vw, 65px)/.98 Georgia, "Times New Roman", serif;
+    letter-spacing: -.05em;
+    text-shadow: 2px 3px 0 #333, 0 0 18px #fff8;
+}
+
+.hero-copy h1 span {
+    color: #c9c9c9;
+}
+
+.hero-subtitle {
+    margin: 12px 0 10px;
+    color: #f1f1f1;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.discount {
+    width: 300px;
+    min-height: 119px;
+    margin: 3px 0 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ddd;
+    border-radius: 24px;
+}
+
+.discount-top {
+    color: #f5f5f5;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.discount strong {
+    color: #f4f4f4;
+    font: italic 900 68px/.94 Arial, sans-serif;
+    letter-spacing: -.08em;
+    text-shadow: 0 0 14px #fff9;
+    animation: heartbeat 2.3s ease-in-out infinite;
+}
+
+.discount-bottom {
+    color: #eee;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.offer-button {
+    min-width: 244px;
+    min-height: 51px;
+    padding: 0 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 28px;
+    color: #111;
+    background: linear-gradient(100deg, #ddd, #fff, #bbb);
+    box-shadow: 0 0 16px #fff8;
+    font-size: 18px;
+    font-weight: 900;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.offer-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px #fff;
+}
+
+/* Product cards */
+.products-section {
+    width: min(970px, calc(100% - 80px));
+    margin: 27px auto 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 27px;
+}
+
+.section-title h2 {
+    margin: 0;
+    color: #f0f0f0;
+    font: bold 36px/1.1 Georgia, "Times New Roman", serif;
+    text-shadow: 0 0 12px #fff8;
+    white-space: nowrap;
+}
+
+.title-rule {
+    width: 150px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ddd);
+}
+
+.title-rule:last-child {
+    transform: scaleX(-1);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.product-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #303030, #151515);
+    box-shadow: 0 0 16px #fff4;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 22px #fff8;
+}
+
+.product-image {
+    display: block;
+    width: 100%;
+    height: 205px;
+    object-fit: contain;
+    background: linear-gradient(145deg, #f5f5f5, #999);
+}
+
+.product-info {
+    padding: 15px 18px 17px;
+    border-top: 1px solid #aaa;
+}
+
+.product-info h3 {
+    margin: 2px 0 5px;
+    color: #f5f5f5;
+    font: bold 20px Georgia, "Times New Roman", serif;
+}
+
+.product-info p {
+    margin: 0;
+    color: #ccc;
+    font-size: 13px;
+}
+
+/* Contact and WhatsApp */
+.contact-section {
+    margin: 70px auto 0;
+    padding: 27px 20px 10px;
+    border-top: 1px solid #888;
+    color: #ccc;
+    text-align: center;
+}
+
+.contact-section p {
+    margin: 0 0 10px;
+}
+
+.contact-section a {
+    color: #fff;
+    font-weight: 800;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+.contact-section>span {
+    display: block;
+    margin-top: 17px;
+    color: #aaa;
+    font: bold 21px Georgia, serif;
+}
+
+.whatsapp-float {
+    position: fixed;
+    z-index: 5;
+    right: 22px;
+    bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    animation: whatsapp-pulse 1.8s ease-in-out infinite;
+}
+
+.whatsapp-message {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    color: #111;
+    background: #eee;
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.whatsapp-button {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    color: #111;
+    background: linear-gradient(145deg, #f7f7f7, #aaa);
+    box-shadow: 0 0 0 4px #aaa, 0 0 20px 8px #fff8;
+}
+
+.whatsapp-button svg {
+    width: 43px;
+    height: 43px;
+    fill: currentColor;
+}
+
+.whatsapp-button svg path:first-child {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+}
+
+/* Motion */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    8% {
+        transform: scale(1.06);
+    }
+
+    16% {
+        transform: scale(1);
+    }
+
+    24% {
+        transform: scale(1.04);
+    }
+
+    32% {
+        transform: scale(1);
+    }
+}
+
+@keyframes whatsapp-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive layout */
+@media (min-width: 1450px) {
+    .hero {
+        width: min(1260px, calc(100% - 100px));
+        height: 480px;
+    }
+
+    .products-section {
+        width: 1050px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .header-inner {
+        padding: 0 20px;
+    }
+
+    .brand {
+        font-size: 31px;
+    }
+
+    .main-nav {
+        gap: 8px;
+    }
+
+    .nav-link {
+        min-width: 85px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .hero {
+        height: 410px;
+        grid-template-columns: 43% 57%;
+    }
+
+    .hero-copy {
+        padding-right: 22px;
+    }
+
+    .hero-copy h1 {
+        font-size: 50px;
+    }
+
+    .products-section {
+        width: min(900px, calc(100% - 60px));
+    }
+
+    .product-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 740px) {
+    .site-header {
+        height: auto;
+        min-height: 120px;
+    }
+
+    .header-inner {
+        min-height: 116px;
+        height: auto;
+        padding: 19px 15px 13px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .brand {
+        font-size: 33px;
+    }
+
+    .main-nav {
+        width: 100%;
+        gap: 6px;
+    }
+
+    .nav-link {
+        min-width: 0;
+        height: 38px;
+        flex: 1;
+        padding: 0 5px;
+        font-size: 11px;
+    }
+
+    main {
+        padding-top: 13px;
+    }
+
+    .hero {
+        width: calc(100% - 28px);
+        height: auto;
+        min-height: 570px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 245px 1fr;
+        border-radius: 24px;
+    }
+
+    .hero-photo {
+        object-position: center 28%;
+    }
+
+    .hero-copy {
+        grid-row: 2;
+        padding: 17px 12px 23px;
+    }
+
+    .season-label {
+        padding: 8px 14px;
+        font-size: 11px;
+    }
+
+    .hero-copy h1 {
+        margin-top: 12px;
+        font-size: clamp(38px, 10vw, 50px);
+    }
+
+    .hero-subtitle {
+        margin: 9px 0;
+        font-size: 12px;
+    }
+
+    .discount {
+        width: 245px;
+        min-height: 101px;
+        margin: 2px 0 11px;
+    }
+
+    .discount strong {
+        font-size: 55px;
+    }
+
+    .discount-top {
+        font-size: 15px;
+    }
+
+    .discount-bottom {
+        font-size: 14px;
+    }
+
+    .offer-button {
+        min-width: 205px;
+        min-height: 45px;
+        font-size: 16px;
+    }
+
+    .products-section {
+        width: calc(100% - 42px);
+        margin-top: 24px;
+    }
+
+    .section-title {
+        gap: 10px;
+        margin-bottom: 19px;
+    }
+
+    .section-title h2 {
+        font-size: clamp(23px, 6.5vw, 32px);
+    }
+
+    .title-rule {
+        width: min(10vw, 52px);
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+        max-width: 420px;
+        margin: auto;
+    }
+
+    .product-image {
+        height: 225px;
+    }
+
+    .product-info {
+        padding: 12px 16px 15px;
+    }
+
+    .whatsapp-float {
+        right: 13px;
+        bottom: 15px;
+        gap: 8px;
+    }
+
+    .whatsapp-message {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+    .whatsapp-button {
+        width: 58px;
+        height: 58px;
+    }
+
+    .whatsapp-button svg {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 390px) {
+    .nav-link {
+        padding: 0 3px;
+        font-size: 10px;
+    }
+
+    .hero {
+        min-height: 545px;
+        grid-template-rows: 225px 1fr;
+    }
+
+    .section-title h2 {
+        font-size: 23px;
+    }
+
+    .title-rule {
+        width: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

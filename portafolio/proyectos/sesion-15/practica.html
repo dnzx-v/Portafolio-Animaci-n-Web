@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#261b22">
+    <meta name="description" content="Vampire Shop: moda alternativa para vestir tu propia noche.">
+    <title>Vampire Shop — Viste tu propia noche</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --paper: #aca4cbc6;
+            --ink: #fff3f0;
+            --muted: #000000;
+            --wine: #bdb5e3;
+            --line: rgba(153, 127, 201, 0.422);
+            --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 12% 25%, rgba(99, 66, 166, 0.2), transparent 34rem),
+                radial-gradient(ellipse at 88% 65%, rgba(130, 104, 217, 0.18), transparent 38rem),
+                var(--paper);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body, button, a { -webkit-tap-highlight-color: transparent; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+        img { display: block; max-width: 100%; }
+        [hidden] { display: none !important; }
+
+        #loader {
+            position: fixed;
+            z-index: 100;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at center, #343863, #8d90a5 70%);
+            transition: opacity .45s ease, visibility .45s ease;
+        }
+
+        #loader.oculto {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #loader img {
+            width: clamp(140px, 22vw, 200px);
+            height: clamp(140px, 22vw, 200px);
+            border-radius: 50%;
+            object-fit: cover;
+            animation: girar 1.2s linear infinite;
+            border: 2px solid rgba(168, 203, 255, 0.75);
+            box-shadow: 0 0 28px rgba(133, 178, 255, 0.4);
+        }
+
+        @keyframes girar { to { transform: rotate(360deg); } }
+
+        .announcement {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #746f96, #5b518b 52%, #c3ace1);
+            color: #fff5f1;
+            text-align: center;
+            font-size: .68rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            border-bottom: 1px solid var(--line);
+            background: rgba(201, 197, 233, 0.94);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            width: min(1240px, calc(100% - 64px));
+            min-height: 76px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand {
+            width: fit-content;
+            font-family: var(--serif);
+            font-size: 1.55rem;
+            font-weight: 700;
+            letter-spacing: -.06em;
+        }
+
+        .brand span { color: var(--wine); }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .main-nav a, .cart-link {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .main-nav a { transition: color .2s ease; }
+        .main-nav a:hover, .main-nav a:focus-visible { color: var(--wine); }
+        .cart-link { justify-self: end; }
+
+        .cart-link span {
+            display: inline-grid;
+            width: 23px;
+            height: 23px;
+            margin-left: 5px;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #9699c9, #7558e8);
+            color: #261c37;
+            font-size: .68rem;
+        }
+
+        main { overflow: hidden; }
+
+        .hero {
+            position: relative;
+            min-height: 610px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(135deg, #3e3458, #7e75ae);
+        }
+
+        .hero-image {
+            min-height: 610px;
+            background:
+                linear-gradient(90deg, rgba(47, 28, 36, .12) 45%, rgba(40, 41, 91, 0.66)),
+                linear-gradient(0deg, rgba(58, 28, 40, .25), transparent 60%),
+                url("https://i.pinimg.com/1200x/70/b6/59/70b659cc38986bc6ec32b2416643ebba.jpg") center 35% / cover,
+                #454375;
+        }
+
+        .hero-copy {
+            position: relative;
+            align-self: center;
+            max-width: 610px;
+            padding: 64px clamp(36px, 7vw, 110px);
+            background:
+                radial-gradient(circle at 82% 18%, rgba(255, 172, 157, .16), transparent 12rem),
+                linear-gradient(145deg, #363757, #4d4681 62%, #50589b);
+        }
+
+        .hero-copy::after {
+            position: absolute;
+            top: 28px;
+            right: 34px;
+            color: #bca8ff;
+            content: "✧";
+            font-size: 2.8rem;
+            opacity: .8;
+        }
+
+        .eyebrow {
+            display: block;
+            margin-bottom: 24px;
+            color: #657ca8;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        h1, h2, h3, p { margin-top: 0; }
+        h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
+
+        .hero h1 {
+            margin-bottom: 18px;
+            font-size: clamp(3.4rem, 6vw, 6.5rem);
+            line-height: .87;
+            letter-spacing: -.07em;
+            color: #fff7f4;
+        }
+
+        .hero h1 em { color: #05105b; font-weight: 400; }
+        .hero-copy > p { max-width: 340px; color: #d4e6f0; line-height: 1.7; }
+
+        .hero-offer {
+            margin: 28px 0;
+            padding-left: 14px;
+            border-left: 2px solid var(--wine);
+            color: #f0d7d4;
+            font-size: .82rem;
+            line-height: 1.6;
+        }
+
+        .hero-offer strong {
+            display: block;
+            color: #b7a8ff;
+            font-family: var(--serif);
+            font-size: 1.65rem;
+            font-weight: 500;
+        }
+
+        .button {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 25px;
+            border: 1px solid rgba(255, 220, 211, .5);
+            border-radius: 999px;
+            background: linear-gradient(110deg, #7977ee, #83b2f3);
+            color: #25203a;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(110, 87, 210, 0.22);
+            cursor: pointer;
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+
+        .button:hover, .button:focus-visible {
+            border-color: #becfff;
+            background: linear-gradient(110deg, #8dc0ff, #9bdcff);
+            color: #39212a;
+        }
+
+        .section {
+            width: min(1240px, calc(100% - 64px));
+            margin: 0 auto;
+            padding: 100px 0 20px;
+            scroll-margin-top: 90px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 34px;
+        }
+
+        .section-heading .eyebrow { margin-bottom: 12px; }
+        .section-heading h2 {
+            margin-bottom: 0;
+            font-size: clamp(2.4rem, 4vw, 4rem);
+            letter-spacing: -.06em;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .product-card {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: linear-gradient(145deg, #303249, #252e33);
+            box-shadow: 0 12px 30px rgba(19, 9, 14, .2);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(155, 152, 255, 0.58);
+            box-shadow: 0 16px 36px rgba(19, 9, 14, .32), 0 0 22px rgba(226, 98, 109, .14);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            background: #353853;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .product-card:hover .product-image img { transform: scale(1.035); }
+
+        .product-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 8px 11px;
+            border: 1px solid rgba(255, 255, 255, .4);
+            border-radius: 999px;
+            background: linear-gradient(110deg, #a7b6ff, #9bbeff);
+            color: #283149;
+            font-weight: 700;
+            font-size: .62rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .product-info { padding: 18px; }
+
+        .product-info h3 {
+            margin-bottom: 6px;
+            font-size: 1.45rem;
+            letter-spacing: -.03em;
+            color: #fff3f0;
+        }
+
+        .product-info p {
+            min-height: 38px;
+            margin-bottom: 14px;
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.5;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .price { color: #a8b7ff; font-size: .9rem; font-weight: 700; }
+
+        .add-button {
+            padding: 10px 0 8px;
+            border: 0;
+            border-bottom: 1px solid #bd9aff;
+            background: transparent;
+            color: #a0c9ff;
+            cursor: pointer;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .add-button:hover, .add-button:focus-visible { color: #042a4e; }
+        .site-footer {
+            padding: 30px 32px;
+            background: linear-gradient(100deg, #30222c, #59323f, #30222c);
+            color: #f1dada;
+            text-align: center;
+            font-size: .75rem;
+            letter-spacing: .04em;
+        }
+
+        .site-footer p { margin: 0; }
+
+        .toast {
+            position: fixed;
+            z-index: 30;
+            right: 24px;
+            bottom: 24px;
+            max-width: calc(100vw - 48px);
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 192, 168, .35);
+            border-radius: 14px;
+            background: linear-gradient(115deg, #743d4d, #4f70a2);
+            color: white;
+            font-size: .82rem;
+            box-shadow: 0 10px 32px rgba(19, 9, 14, .42);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            clip-path: inset(50%);
+        }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                width: calc(100% - 36px);
+                min-height: 68px;
+                grid-template-columns: 1fr auto;
+                row-gap: 0;
+            }
+
+            .brand { font-size: 1.35rem; }
+            .main-nav {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                justify-content: center;
+                gap: clamp(14px, 5vw, 28px);
+                padding: 0 0 14px;
+            }
+
+            .main-nav a, .cart-link { font-size: .66rem; }
+            .cart-link { grid-column: 2; grid-row: 1; }
+
+            .hero { grid-template-columns: 1fr; }
+            .hero-image { min-height: 430px; }
+            .hero-copy { max-width: none; padding: 50px 9vw 58px; }
+            .hero h1 { font-size: clamp(3.8rem, 15vw, 6.5rem); }
+
+            .section, .manifesto { width: calc(100% - 36px); }
+            .section { padding-top: 74px; }
+            .section-heading { align-items: flex-start; flex-direction: column; }
+            .product-grid { gap: 26px 14px; }
+            .product-info h3 { font-size: 1.2rem; }
+            .product-info p { min-height: 52px; }
+            .product-bottom { align-items: flex-start; flex-direction: column; gap: 4px; }
+            .manifesto { margin: 80px auto 70px; padding: 48px 4px; }
+        }
+
+        @media (max-width: 480px) {
+            .announcement { font-size: .58rem; letter-spacing: .1em; }
+            .main-nav { gap: 15px; }
+            .main-nav a { font-size: .6rem; }
+            .hero-image { min-height: 350px; }
+            .product-grid { grid-template-columns: 1fr; gap: 30px; }
+            .product-image { aspect-ratio: 4 / 4.6; }
+            .product-info p { min-height: 0; }
+            .product-bottom { align-items: center; flex-direction: row; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="loader" role="status" aria-label="Cargando Vampire Shop">
+        <img src="gojo.jpg" alt="">
+        <span class="sr-only">Cargando tienda…</span>
+    </div>
+
+    <div class="announcement">Una noche especial: hasta 50% en piezas seleccionadas</div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#inicio" aria-label="Vampire Shop, inicio">Vampire<span>.</span></a>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <a href="#inicio">Inicio</a>
+                <a href="#coleccion">Colección</a>
+            </nav>
+            <a class="cart-link" href="#coleccion" aria-label="Carrito de compras, 0 productos">
+                Carrito <span id="cart-count" aria-live="polite">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-image" role="img" aria-label="Modelo con un look de moda alternativa"></div>
+            <div class="hero-copy">
+                <span class="eyebrow">Colección de temporada · 2026</span>
+                <h1 id="hero-title">Viste tu<br>propia <em>noche.</em></h1>
+                <a class="button" href="#coleccion">Descubrir la colección</a>
+            </div>
+        </section>
+
+        <section class="section" id="coleccion" aria-labelledby="collection-title">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">Selección Vampire</span>
+                    <h2 id="collection-title">Piezas con actitud</h2>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="ropa.jpg" alt="Vestido negro de estilo elegante" loading="lazy">
+                        <span class="product-tag">Favorito</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Vestidos góticos</h3>
+                        <p>Siluetas oscuras para dejar huella en cada ocasión.</p>
+                        <div class="product-bottom">
+                            <span class="price">$49.99</span>
+                            <button class="add-button" type="button" data-product="Vestidos góticos">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="alt.jpg" alt="Conjunto de moda alternativa" loading="lazy">
+                        <span class="product-tag">Nueva colección</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Moda alternativa</h3>
+                        <p>Combina texturas y encuentra una forma propia de vestir.</p>
+                        <div class="product-bottom">
+                            <span class="price">$39.99</span>
+                            <button class="add-button" type="button" data-product="Moda alternativa">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="accesorios.jpg" alt="Accesorios de moda en tonos plateados" loading="lazy">
+                        <span class="product-tag">Últimas piezas</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Accesorios nocturnos</h3>
+                        <p>El detalle final para completar tu look de noche.</p>
+                        <div class="product-bottom">
+                            <span class="price">$19.99</span>
+                            <button class="add-button" type="button" data-product="Accesorios nocturnos">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Vampire Shop</p>
+    </footer>
+
+    <div class="toast" id="cart-message" role="status" aria-live="polite" hidden></div>
+
+    <script>
+        const loader = document.getElementById("loader");
+        const cartCount = document.getElementById("cart-count");
+        const cartLink = document.querySelector(".cart-link");
+        const cartMessage = document.getElementById("cart-message");
+        let itemsInCart = 0;
+        let toastTimer;
+
+        window.addEventListener("load", () => {
+            window.setTimeout(() => loader.classList.add("oculto"), 1200);
+            window.setTimeout(() => loader.remove(), 1700);
+        });
+
+        document.querySelectorAll(".add-button").forEach((button) => {
+            button.addEventListener("click", () => {
+                itemsInCart += 1;
+                cartCount.textContent = String(itemsInCart);
+                cartLink.setAttribute("aria-label", `Carrito de compras, ${itemsInCart} ${itemsInCart === 1 ? "producto" : "productos"}`);
+                cartMessage.textContent = `${button.dataset.product} agregado al carrito`;
+                cartMessage.hidden = false;
+                window.clearTimeout(toastTimer);
+                toastTimer = window.setTimeout(() => {
+                    cartMessage.hidden = true;
+                }, 2200);
+            });
+        });
+    </script>
+</body>
+</html>

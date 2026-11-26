@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="Vampire Shop: moda gótica y accesorios con estilo alternativo.">
+  <title>Vampire Shop — Sweet Vampire Night</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="inicio">
+    <div class="header-inner">
+      <a class="brand" href="#inicio">Vampire Shop</a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link active" href="#inicio" aria-current="page">Inicio</a>
+        <a class="nav-link" href="#ofertas">Ofertas</a>
+        <a class="nav-link" href="#productos">Productos</a>
+        <a class="nav-link" href="#contacto">Contacto</a>
+      </nav>
+    </div>
+    <div class="header-underline"></div>
+  </header>
+
+  <main>
+    <section class="hero" id="ofertas" aria-labelledby="hero-title">
+      <div class="hero-art-wrap">
+        <img class="hero-photo" src="media/iconnn.jpg" alt="Ilustración de una chica gótica en blanco y negro">
+      </div>
+      <div class="hero-copy">
+        <div class="season-label">ESPECIAL DE TEMPORADA</div>
+        <h1 id="hero-title">Sweet Vampire<br><span>Night</span></h1>
+        <p class="hero-subtitle">¡Aprovecha nuestras ofertas especiales!</p>
+        <div class="discount">
+          <span class="discount-top">HASTA</span>
+          <strong>50%</strong>
+          <span class="discount-bottom">DE DESCUENTO</span>
+        </div>
+        <a class="offer-button" href="#productos">Ver ofertas</a>
+      </div>
+    </section>
+
+    <section class="products-section" id="productos" aria-labelledby="products-title">
+      <div class="section-title">
+        <span class="title-rule"></span>
+        <h2 id="products-title">Nuestros Productos</h2>
+        <span class="title-rule"></span>
+      </div>
+      <div class="product-grid">
+        <article class="product-card">
+          <img class="product-image" src="media/icon%20ropa.jpg" alt="Vestido negro de estilo gótico en dos vistas" loading="lazy">
+          <div class="product-info">
+            <h3>Vestidos Góticos</h3>
+            <p>Estilo oscuro para ti</p>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="media/icon.jpg" alt="Muñeca kawaii vestida de negro" loading="lazy">
+          <div class="product-info">
+            <h3>Muñecas Kawaii</h3>
+            <p>Una compañera nocturna</p>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="media/ropa%20model.jpg" alt="Conjunto de moda gótica ilustrado" loading="lazy">
+          <div class="product-info">
+            <h3>Moda Alternativa</h3>
+            <p>Detalles para un look dark</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="contact-section" id="contacto">
+      <a href="https://wa.me/TU_NUMERO?text=%C2%A1Hola%20Vampire%20Shop" target="_blank" rel="noreferrer">Hablemos por WhatsApp</a>
+      <span>Vampire Shop</span>
+    </footer>
+  </main>
+
+  <a class="whatsapp-float" href="https://wa.me/TU_NUMERO?text=%C2%A1Hola%20Vampire%20Shop" target="_blank" rel="noreferrer" aria-label="Escríbenos por WhatsApp">
+    <span class="whatsapp-message">¡Escríbenos!</span>
+    <span class="whatsapp-button" aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        <path d="M24 5a18 18 0 0 0-15.5 27.2L6 42l10-2.5A18 18 0 1 0 24 5Z"/>
+        <path d="M17 15c1-1 2-1 3 0l2 4c.5 1-.5 2-2 3 2 4 5 6 8 7 1-1 2-3 3-2l4 2c1 1 1 2 0 3-1 2-3 3-5 3-6 0-16-9-17-16 0-2 2-4 4-4Z"/>
+      </svg>
+    </span>
+  </a>
+</body>
+</html>

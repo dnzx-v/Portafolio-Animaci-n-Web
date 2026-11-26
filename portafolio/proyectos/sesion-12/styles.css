@@ -1,0 +1,337 @@
+/* 1. Fuente y variables reutilizables */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+    color-scheme: light;
+    font-family: 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #594452;
+    background: #fff5fa;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    --pink: #f27eaa;
+    --pink-dark: #d95689;
+    --lilac: #a68be0;
+    --ink-soft: #886d80;
+}
+
+/* 2. Reinicio y estilos generales */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(circle at 8% 18%, #ffe1ef 0 5px, transparent 6px),
+        radial-gradient(circle at 92% 30%, #eadfff 0 6px, transparent 7px),
+        linear-gradient(145deg, #fff8fc, #fff2f8 55%, #f8f2ff);
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+button {
+    font: inherit;
+}
+
+/* 3. Estructura principal y encabezado */
+.page {
+    width: min(100% - 32px, 920px);
+    margin: 0 auto;
+    padding: 48px 0 24px;
+}
+
+.hero {
+    position: relative;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 8px;
+    color: #704b68;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+}
+
+.hero-mascot {
+    display: inline-block;
+    color: #a184c9;
+    font-size: 1.7rem;
+}
+
+/* 4. Tarjetas y mensaje interactivo */
+.card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(220, 187, 211, 0.65);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 32px rgba(139, 94, 127, 0.09);
+}
+
+.greeting-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: 218px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background: linear-gradient(115deg, #fff 20%, #fff0f6);
+    transition: background-color 250ms ease, box-shadow 250ms ease;
+}
+
+.greeting-card.is-loved {
+    background: linear-gradient(115deg, #fff 15%, #f3edff);
+    box-shadow: 0 14px 36px rgba(142, 111, 190, 0.18);
+}
+
+.card-icon {
+    display: grid;
+    flex: 0 0 54px;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    border-radius: 18px;
+    background: #ffe4ef;
+    font-size: 1.6rem;
+}
+
+.card-copy {
+    z-index: 1;
+}
+
+h2 {
+    margin-bottom: 8px;
+    color: #674d63;
+    font-size: 1.35rem;
+    font-weight: 900;
+}
+
+.greeting-message {
+    max-width: 520px;
+    margin-bottom: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+}
+
+/* 5. Botones y decoraciones */
+.button {
+    min-height: 44px;
+    padding: 10px 19px;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(87, 58, 83, 0.13);
+    transition: transform 150ms ease, filter 150ms ease, background-color 200ms ease;
+}
+
+.button:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(87, 58, 83, 0.13);
+}
+
+.button:focus-visible {
+    outline: 3px solid #6f5590;
+    outline-offset: 3px;
+}
+
+.button-pink {
+    background: var(--pink);
+}
+
+.greeting-card.is-loved .button-pink {
+    background: var(--lilac);
+}
+
+.button-lilac {
+    background: var(--lilac);
+}
+
+.sparkle {
+    position: absolute;
+    color: #ed9bbb;
+    font-size: 2rem;
+}
+
+.sparkle-one {
+    top: 28px;
+    right: 33px;
+}
+
+.sparkle-two {
+    right: 74px;
+    bottom: 25px;
+    color: #b19be8;
+}
+
+/* 6. Demostraciones y cajitas en movimiento */
+.demos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.demo-card {
+    min-width: 0;
+    padding: 25px;
+}
+
+.demo-card > .card-icon {
+    float: right;
+    width: 46px;
+    height: 46px;
+    font-size: 1.4rem;
+}
+
+.step-label {
+    margin-bottom: 5px;
+    color: var(--pink-dark);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.description {
+    min-height: 48px;
+    margin-bottom: 20px;
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    line-height: 1.55;
+}
+
+.track {
+    position: relative;
+    height: 68px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border: 2px dashed #edc5d8;
+    border-radius: 17px;
+    background: #fff7fb;
+}
+
+.track::after {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    left: 15px;
+    border-top: 2px dotted #e8c1d5;
+    content: '';
+}
+
+.moving-box {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 8px;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    background: #ffe1ed;
+    box-shadow: 0 4px 10px rgba(146, 95, 128, 0.17);
+    font-size: 1.55rem;
+    transform: translateY(-50%);
+}
+
+.bunny {
+    background: #e9e1ff;
+}
+
+.track-end {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 7px;
+    font-size: 1rem;
+    transform: translateY(-50%);
+}
+
+.track-end-left {
+    right: auto;
+    left: 7px;
+}
+
+.status {
+    min-height: 1.3em;
+    margin: 10px 0 0;
+    color: var(--ink-soft);
+    font-size: 0.83rem;
+    font-weight: 700;
+}
+
+/* 7. Pie de página */
+footer {
+    padding: 25px 0 0;
+    color: #a4879b;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+footer span {
+    color: var(--pink);
+}
+
+/* 8. Ajustes para pantallas pequeñas */
+@media (max-width: 640px) {
+    .page {
+        padding-top: 34px;
+    }
+
+    .greeting-card {
+        gap: 13px;
+        padding: 22px 18px;
+    }
+
+    .greeting-card > .card-icon {
+        flex-basis: 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 15px;
+        font-size: 1.35rem;
+    }
+
+    .sparkle-one {
+        top: 13px;
+        right: 15px;
+    }
+
+    .sparkle-two {
+        right: 24px;
+        bottom: 12px;
+    }
+
+    .demos {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .demo-card {
+        padding: 22px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

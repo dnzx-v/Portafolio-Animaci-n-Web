@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1ff">
+  <title>Portafolio de Animación Web | Dnz</title>
+  <meta name="description" content="Portafolio académico de Dnz: proyectos de animación y diseño web.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="hero" id="inicio">
+      <header class="site-header">
+        <a class="brand" href="#inicio" aria-label="Dnz, inicio">dnz<span>.</span></a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false">Menú</button>
+        <nav class="nav" id="sidebar" aria-label="Navegación principal">
+          <a href="#inicio" class="active">Inicio</a>
+          <a href="#trabajos">Proyectos</a>
+          <a href="#sobre-mi">Sobre mí</a>
+          <a href="#tecnologias">Tecnologías</a>
+        </nav>
+      </header>
+
+      <div class="hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">PORTAFOLIO ACADÉMICO · SEGUNDO CICLO</p>
+          <h1>Portafolio<br><em>Animación Web</em></h1>
+          <p class="hero-sub">Proyectos y aprendizajes del curso de Animación Web, presentados desde el segundo ciclo de mi formación.</p>
+          <div class="hero-details">
+            <p><span>CURSO</span>Animación Web</p>
+            <p><span>PROFESOR</span>Pedro León</p>
+            <p><span>INSTITUTO</span>IESTP “Trujillo”</p>
+          </div>
+          <a href="#trabajos" class="btn-main">Ver mis proyectos</a>
+        </div>
+        <div class="hero-art">
+          <div class="hero-artwork">
+            <img src="logo.jpg" alt="Ilustración de una figura en movimiento con la frase Ideas en movimiento">
+          </div>
+        </div>
+      </div>
+      <div class="hero-index">TRUJILLO · PERÚ</div>
+    </section>
+
+    <section class="works reveal" id="trabajos">
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">UNA SELECCIÓN DE MI TRABAJO</p>
+          <h2>Proyectos <em>destacados</em></h2>
+        </div>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar proyectos">
+        <button class="chip active" data-filter="todos" type="button">Todos</button>
+        <button class="chip" data-filter="html" type="button">HTML</button>
+        <button class="chip" data-filter="css" type="button">CSS</button>
+        <button class="chip" data-filter="js" type="button">JavaScript</button>
+        <button class="chip" data-filter="animacion" type="button">Animación</button>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>No hay proyectos con ese filtro todavía.</p>
+    </section>
+
+    <section class="about reveal" id="sobre-mi">
+      <div class="about-title">
+        <p class="eyebrow">UN POCO SOBRE MÍ</p>
+        <h2>Aprender, explorar<br>y <em>crear.</em></h2>
+      </div>
+      <div class="about-content">
+        <p>Soy <strong>Dianina Vargas</strong>, estudiante del segundo ciclo en el Instituto de Educación Superior Público “Trujillo”. Este portafolio reúne los sitios web y prácticas que he creado con HTML, CSS y JavaScript durante el curso de Animación Web, guiado por el profesor <strong>Pedro León</strong>.</p>
+        <ul class="stats">
+          <li><b>10</b><span>Sesiones con código</span></li>
+          <li><b>10</b><span>Proyectos</span></li>
+          <li><b>04</b><span>Tecnologías</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tech reveal" id="tecnologias">
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">HERRAMIENTAS DE CREACIÓN</p>
+          <h2>Lo que <em>utilizo.</em></h2>
+        </div>
+      </div>
+      <div class="tech-cards">
+        <article>
+          <span>01</span>
+          <svg class="tech-logo" viewBox="0 0 64 72" aria-hidden="true">
+            <path fill="#e44d26" d="M8 3h48l-4.4 52L32 62 12.4 55z"/>
+            <path fill="#f16529" d="M32 7h20l-3.8 44L32 57z"/>
+            <text x="32" y="46" fill="#fff" font-size="35" font-weight="900" text-anchor="middle">5</text>
+          </svg>
+          <h3>HTML5</h3>
+          <p>Estructura semántica, contenido multimedia y formularios.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <svg class="tech-logo" viewBox="0 0 64 72" aria-hidden="true">
+            <path fill="#1572b6" d="M8 3h48l-4.4 52L32 62 12.4 55z"/>
+            <path fill="#33a9dc" d="M32 7h20l-3.8 44L32 57z"/>
+            <text x="32" y="46" fill="#fff" font-size="35" font-weight="900" text-anchor="middle">3</text>
+          </svg>
+          <h3>CSS3</h3>
+          <p>Diseño visual, transiciones, transformaciones y animaciones.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <svg class="tech-logo" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="4" y="4" width="56" height="56" rx="4" fill="#f7df1e"/>
+            <text x="52" y="49" fill="#17171b" font-size="25" font-weight="900" text-anchor="end">JS</text>
+          </svg>
+          <h3>JavaScript</h3>
+          <p>Interacciones, eventos y experiencias dinámicas.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <svg class="tech-logo" viewBox="0 0 72 64" aria-hidden="true">
+            <path d="M36 4 61 18v28L36 60 11 46V18z" fill="none" stroke="#43853d" stroke-width="5"/>
+            <text x="36" y="37" fill="#43853d" font-size="13" font-weight="900" text-anchor="middle">node</text>
+            <text x="36" y="48" fill="#43853d" font-size="7" font-weight="700" text-anchor="middle">.js</text>
+          </svg>
+          <h3>Node.js</h3>
+          <p>Entorno para ejecutar JavaScript y crear servicios del lado del servidor.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar ventana">Cerrar</button>
+      <span class="tag" id="modalTag"></span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <div class="modal-media" id="modalMedia"></div>
+      <div class="modal-links" id="modalLinks"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

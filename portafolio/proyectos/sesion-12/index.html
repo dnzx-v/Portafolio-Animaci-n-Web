@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff5fa">
+    <title>S12</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="page">
+        <header class="hero">
+            <h1>¡Ciao  Benvenuto </h1>
+            <span class="hero-mascot" aria-hidden="true">૮ ˶ᵔ ᵕ ᵔ˶ ა</span>
+        </header>
+
+        <section class="card greeting-card" aria-labelledby="greeting-title">
+            <div class="card-icon" aria-hidden="true">💌</div>
+            <div class="card-copy">
+                <h2 id="greeting-title">Un mensaje</h2>
+                <p id="greeting-message" class="greeting-message" aria-live="polite">
+                    Salmo 34:17-18
+                </p>
+                <button class="button button-pink" id="surprise-button" type="button" aria-pressed="false">
+                    ¡Dame una sorpresa!
+                </button>
+            </div>
+            <span class="sparkle sparkle-one" aria-hidden="true">✦</span>
+            <span class="sparkle sparkle-two" aria-hidden="true">♡</span>
+        </section>
+
+        <section class="demos" aria-label="Demostraciones de movimiento">
+            <article class="card demo-card">
+                <div class="card-icon" aria-hidden="true">🍓</div>
+                <p class="step-label">02 · Viaje de ida</p>
+                <h2>Un paseíto en línea</h2>
+                <p class="description">La fresita cruza el caminito una vez. ¡Tú decides cuándo empieza!</p>
+                <div class="track" id="one-way-track" aria-label="Camino de movimiento de ida">
+                    <span class="track-end" aria-hidden="true">🏁</span>
+                    <span class="moving-box strawberry" id="one-way-box" aria-hidden="true">🍓</span>
+                </div>
+                <button class="button button-lilac" id="start-button" type="button">
+                    ¡A pasear!
+                </button>
+                <p class="status" id="one-way-status" aria-live="polite">Listo</p>
+            </article>
+
+            <article class="card demo-card">
+                <div class="card-icon" aria-hidden="true">🐰</div>
+                <p class="step-label">03 · Ida y vuelta</p>
+                <h2>El conejito viajero</h2>
+                <p class="description">Va de un lado al otro y regresa sin parar. ¡Un viaje infinito!</p>
+                <div class="track" id="loop-track" aria-label="Camino de ida y vuelta">
+                    <span class="track-end track-end-left" aria-hidden="true">🌼</span>
+                    <span class="track-end track-end-right" aria-hidden="true">🌼</span>
+                    <span class="moving-box bunny" id="loop-box" aria-hidden="true">🐰</span>
+                </div>
+            </article>
+        </section>
+
+        <footer>-----------------<span aria-hidden="true">♡</span></footer>
+    </main>
+</body>
+</html>
