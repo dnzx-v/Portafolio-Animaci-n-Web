@@ -1,6 +1,27 @@
 /* Para agregar o editar un proyecto, modifica el arreglo SESIONES. */
 
 const SESIONES = [
+  { n: 2, titulo: "FireWorks", tags: ["html", "animacion"], filtro: "HTML  · Animación",
+    cover: "proyectos/sesion-02/FireWorks.mp4", coverType: "video",
+    media: "proyectos/sesion-02/FireWorks.mp4", type: "video", mediaTitle: "FireWorks",
+    extraMedia: [
+      { src: "proyectos/sesion-02/FireWorks1.mp4", type: "video", titulo: "FireWorks 1" },
+      { src: "proyectos/sesion-02/FireWorks2.mp4", type: "video", titulo: "FireWorks 2" }] },
+
+  { n: 3, titulo: "Animaciones", tags: ["html", "animacion"], filtro: "HTML · Animación",
+    cover: "proyectos/sesion-03/semana3.gif",
+    media: "proyectos/sesion-03/WhatsApp Video 2026-11-26 at 8.59.44 AM.mp4", type: "video",
+    mediaTitle: "",
+    extraMedia: [
+      { src: "proyectos/sesion-03/WhatsApp Video 2026-11-26 at 8.59.44 AM (1).mp4", type: "video" },
+      { src: "proyectos/sesion-03/semana3.gif", type: "image", titulo: "GIF de la sesión 03" },
+      { src: "proyectos/sesion-03/semana3..gif", type: "image", titulo: "GIF adicional de la sesión 03" }] },
+
+  { n: 4, titulo: "Trujillo y sus lugares", tags: ["html", "css", "animacion"], filtro: "HTML· Animación",
+    cover: "logo.jpg",
+    media: "proyectos/sesion-04/Trujillo y sus lugares.mp4", type: "video",
+    desc: "Video animado sobre los principales lugares de Trujillo." },
+
   { n: 5, titulo: "Pixel Shop: Etiquetas y Selectores", tags: ["html", "css"], filtro: "HTML · CSS", cover: "assets/previews/sesion-05.png",
     url: "proyectos/sesion-05/index.html", desc: "Tienda de tecnología con catálogo de productos." },
 
@@ -44,8 +65,11 @@ SESIONES.forEach(s => {
   const card = document.createElement("article");
   card.className = "card";
   card.dataset.tags = s.tags.join(" ");
+  const preview = s.coverType === "video"
+    ? `<video src="${s.cover}" autoplay muted loop playsinline preload="metadata"></video>`
+    : `<img src="${s.cover}" alt="" loading="lazy">`;
   card.innerHTML = `
-    <div class="card-preview" aria-hidden="true"><img src="${s.cover}" alt="" loading="lazy"></div>
+    <div class="card-preview${s.coverFit === "contain" ? " contain" : ""}" aria-hidden="true">${preview}</div>
     <div class="card-copy">
       <span class="tag">Sesión ${s.n}</span>
       <span class="card-index">${String(s.n).padStart(2, "0")}</span>
@@ -58,6 +82,7 @@ SESIONES.forEach(s => {
 });
 
 function abrir(s) {
+  if (s.media) { mostrarVisor(s); return; }
   if (!s.links) { window.open(s.url, "_blank", "noopener"); return; }
   mostrarVisor(s);
 }
@@ -86,14 +111,53 @@ const mLinks = document.getElementById("modalLinks");
 function mostrarVisor(s) {
   document.getElementById("modalTag").textContent = "Sesión " + s.n;
   document.getElementById("modalTitle").textContent = s.titulo;
-  document.getElementById("modalDesc").textContent = s.desc || "";
+  const description = document.getElementById("modalDesc");
+  description.textContent = s.desc || "";
+  description.hidden = !s.desc;
   mMedia.innerHTML = "";
   mLinks.innerHTML = "";
 
-  const fr = document.createElement("iframe");
-  fr.src = s.url; fr.title = s.titulo; fr.loading = "lazy";
-  mMedia.appendChild(fr);
-  mLinks.appendChild(crearLink("Abrir página completa", s.url));
+  if (s.media) {
+    const recursos = [{ src: s.media, type: s.type, titulo: s.mediaTitle === undefined ? s.titulo : s.mediaTitle }, ...(s.extraMedia || [])];
+    recursos.forEach(recurso => {
+      if (recurso.type === "video") {
+        const figure = document.createElement("figure");
+        figure.className = "modal-video";
+        if (recurso.titulo) {
+          const caption = document.createElement("figcaption");
+          caption.textContent = recurso.titulo;
+          figure.appendChild(caption);
+        }
+        const video = document.createElement("video");
+        video.controls = true;
+        video.preload = "auto";
+        video.playsInline = true;
+        video.setAttribute("aria-label", recurso.titulo || s.titulo);
+        const source = document.createElement("source");
+        source.src = recurso.src;
+        source.type = "video/mp4";
+        video.appendChild(source);
+        figure.appendChild(video);
+        mMedia.appendChild(figure);
+        return;
+      }
+
+      const image = document.createElement("img");
+      image.src = recurso.src;
+      image.alt = recurso.titulo;
+      mMedia.appendChild(image);
+    });
+  } else {
+    const fr = document.createElement("iframe");
+    fr.src = s.url; fr.title = s.titulo; fr.loading = "lazy";
+    mMedia.appendChild(fr);
+  }
+
+  if (s.url) mLinks.appendChild(crearLink("Abrir página completa", s.url));
+  if (s.media && s.mediaTitle !== "") mLinks.appendChild(crearLink("Abrir " + (s.mediaTitle || "recurso completo"), s.media));
+  (s.extraMedia || []).forEach(recurso => {
+    if (recurso.titulo) mLinks.appendChild(crearLink("Abrir " + recurso.titulo, recurso.src));
+  });
   (s.links || []).forEach(l => mLinks.appendChild(crearLink(l.txt, l.href)));
   modal.hidden = false;
   document.body.style.overflow = "hidden";
